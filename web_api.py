@@ -1,21 +1,16 @@
 from mastodon import Mastodon
 import re
-import configparser
 from textblob import TextBlob
 from flask import Flask, request, jsonify
 from datetime import datetime
+import os
 
 app = Flask(__name__)
 
-# Create a configparser instance and read the config file
-config = configparser.ConfigParser()
-config.read('config.ini')
-
-# Retrieve Mastodon API credentials from the config file
-client_id = config['mastodon']['client_id']
-client_secret = config['mastodon']['client_secret']
-access_token = config['mastodon']['access_token']
-api_base_url = config['mastodon']['api_base_url']
+client_id = os.environ.get('MASTODON_CLIENT_ID')
+client_secret = os.environ.get('MASTODON_CLIENT_SECRET')
+access_token = os.environ.get('MASTODON_ACCESS_TOKEN')
+api_base_url = os.environ.get('MASTODON_API_BASE_URL')
 
 # Create a Mastodon client instance using the retrieved credentials
 mastodon = Mastodon(
