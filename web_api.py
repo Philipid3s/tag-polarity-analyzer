@@ -75,4 +75,4 @@ def get_average_polarity():
         return jsonify({'message': 'Please provide a "tag" parameter in the URL.'}), 400
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=os.environ.get('PORT', 5000))
